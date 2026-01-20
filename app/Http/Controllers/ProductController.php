@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -92,5 +93,15 @@ class ProductController extends Controller
         }
         $product->save();
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
+    }
+
+    public function destroy($id):RedirectResponse {
+        $product = Product::findOrFail($id);
+
+        Storage::delete('product/' . $product->image);
+
+        $product->delete();
+
+        return redirect()->route('products.index')->with(['success' => 'Data berhasil dihapus']);
     }
 }

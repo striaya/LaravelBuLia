@@ -38,11 +38,11 @@
                                     <td>{{ "Rp" . number_format($product->price, 2, ',','.') }}</td>
                                     <td>{{ $product->stock }}</td>
                                     <td class="text-center">
-                                        <form onsubmit="return confirm('Apakah anda yakin?');" action="" method="POST">
+                                        <form onsubmit="return confirm('Apakah anda yakin?');" action="{{route('products.destroy', $product->id)}}" method="POST">
                                             <a href="{{route('products.show', $product->id)}}" class="btn btn-sm btn-dark">Show</a>
                                             <a href="{{route('products.edit', $product->id)}}" class="btn btn-sm btn-primary">Edit</a>
                                             @csrf
-                                            @method ('DELETE')
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                         </form>
                                     </td>
