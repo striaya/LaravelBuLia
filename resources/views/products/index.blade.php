@@ -32,15 +32,15 @@
                                 @forelse ($products as $product)
                                 <tr>
                                     <td class="text-center">
-                                        <img src="{{ asset('/storage/products/' . $product->image) }}" class="rounded" style="width: 150px" alt="">
+                                        <img src="{{ asset('/storage/' . $product->image) }}" class="rounded" style="width: 150px" alt="">
                                     </td>
                                     <td>{{ $product->title }}</td>
                                     <td>{{ "Rp" . number_format($product->price, 2, ',','.') }}</td>
                                     <td>{{ $product->stock }}</td>
                                     <td class="text-center">
                                         <form onsubmit="return confirm('Apakah anda yakin?');" action="" method="POST">
-                                            <a href="" class="btn btn-sm btn-dark">Show</a>
-                                            <a href="" class="btn btn-sm btn-primary">Edit</a>
+                                            <a href="{{route('products.show', $product->id)}}" class="btn btn-sm btn-dark">Show</a>
+                                            <a href="{{route('products.edit', $product->id)}}" class="btn btn-sm btn-primary">Edit</a>
                                             @csrf
                                             @method ('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

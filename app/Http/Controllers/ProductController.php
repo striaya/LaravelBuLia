@@ -27,7 +27,7 @@ class ProductController extends Controller
             'title' => 'required|string|max:255|min:3',
             'description' => 'required|string|min:10',
             'price' => 'required|numeric',
-            'stock' => 'required|integer',
+            'stock' => 'required|numeric',
         ]);
         $image = $request->file('image');
         $imagePath = $image->storeAs('products', $image->hashName());
@@ -56,5 +56,41 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         return view('products.edit', compact('product'));
+    }
+
+    public function update(Request $request, string $id): RedirectResponse
+    {
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+            'title' => 'required|string|max:255|min:3',
+            'description' => 'required|string|min:10',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+        ]);
+
+        $product = Product::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            Storage::delete($product->image);
+            $image = $request->file('image');
+            $image->storeAs('products', $image->hashName());
+
+            $product->update([
+                'image' => $image->hashName(),
+                'title' => $request->title,
+                'description' => $request->description,
+                'price' => $request->price,
+                'stock' => $request->stock,
+            ]);
+        } else {
+            $product->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'price' => $request->price,
+                'stock' => $request->stock,
+            ]);
+        }
+        $product->save();
+        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 }

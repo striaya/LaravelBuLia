@@ -12,8 +12,9 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form action="{{ route('products.store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('products.update', $product->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">IMAGE</label>
                                 <input type="file" class="form-control @error('image') is-invalid
@@ -27,7 +28,7 @@
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">TITLE</label>
                                 <input type="text" class="form-control @error('title') is-invalid   
-                                @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Title Produk">
+                                @enderror" name="title" value="{{ old('title', $product->title) }}" placeholder="Masukkan Title Produk">
                                 @error('title')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
@@ -37,7 +38,7 @@
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">DESCRIPTION</label>
                                 <input type="text" class="form-control @error('description') is-invalid
-                                @enderror" name="description" rows="5" value="{{ old('description') }}"></textarea>
+                                @enderror" name="description" rows="5" value="{{ old('description', $product->description) }}"></textarea>
                                 @error('description')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
@@ -50,7 +51,7 @@
                                         <label class="font-weight-bold">PRICE</label>
                                         <input type="text" class="form-control @error('price') is-invalid
                                             
-                                        @enderror" name="price" value="{{ old('price') }}" placeholder="Masukkan Price Product">
+                                        @enderror" name="price" value="{{ old('price', $product->price) }}" placeholder="Masukkan Price Product">
                                         @error('price')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
@@ -62,7 +63,7 @@
                                     <div class="form-group mb-3">
                                         <label class="font-weight-bold">STOCK</label>
                                         <input type="text" class="form-control @error('stock') is-invalid
-                                        @enderror" name="stock" value="{{ old('stock') }}" placeholder="Masukkan Stock Produk">
+                                        @enderror" name="stock" value="{{ old('stock', $product->stock) }}" placeholder="Masukkan Stock Produk">
                                         @error('stock')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
@@ -73,7 +74,7 @@
                                     
                             </div>
                                 </div>
-                            <button type="submit" class="btn btn-md btn-primary mt-3">SV</button>
+                            <button type="submit" class="btn btn-md btn-primary mt-3">UPDT</button>
                             <button type="reset" class="btn btn-md btn-warning mt-3">RST</button>
                                 </div>
 
