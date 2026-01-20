@@ -4,32 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Products</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
-                <div class="card border=0 shadow-sm rounded">
+                <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form action="" methode="POST" enctype="multipart/form-data">
+                        <form action="{{ route('products.store')}}" methode="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">IMAGE</label>
                                 <input type="file" class="form-control @error('image') is-invalid
-                                    
-                                @enderror" name="image" required>
+                                @enderror" name="image" >
                                 @error('image')
                                 <div class="alert alert-danger mt-2">
-                                    {{ @message }}
+                                    {{ $message }}
                                 </div>
-                                    
                                 @enderror
                             </div>
+                            <div class="form-group mb-3">
+                                <label class="font-weight-bold">TITLE</label>
+                                <input type="text" class="form-control @error('title') is-invalid   
+                                @enderror" name="title" value="{{ old('title') }}" placeholder="Masukkan Title Produk">
+                                @error('title')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="font-weight-bold">DESCRIPTION</label>
+                                <input type="text" class="form-control @error('description') is-invalid
+                                @enderror" name="description" rows="5" value="{{ old('description') }}"></textarea>
+                                @error('description')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="font-weight-bold">PRICE</label>
+                                        <input type="text" class="form-control @error('price') is-invalid
+                                            
+                                        @enderror" name="price" value="{{ old('price') }}" placeholder="Masukkan Price Product">
+                                        @error('price')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="font-weight-bold">STOCK</label>
+                                        <input type="text" class="form-control @error('stock') is-invalid
+                                        @enderror" name="stock" value="{{ old('stock') }}" placeholder="Masukkan Stock Produk">
+                                        @error('stock')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+
+                                    </div>
+                                    
+                            </div>
+                                </div>
+                            <button type="submit" class="btn btn-md btn-primary mt-3">SV</button>
+                            <button type="reset" class="btn btn-md btn-warning mt-3">RST</button>
+                                                        </div>
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'description' );
+    </script>
 </body>
 </html>

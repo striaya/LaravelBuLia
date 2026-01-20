@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   </head>
 </head>
-<body style="background-color: #30364F">
+<body>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="card border=0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="" class="btn btn-md btn-success mb-3">Add Product</a>
+                        <a href="{{route('products.create')}}" class="btn btn-md btn-success mb-3">Add Product</a>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -39,10 +39,10 @@
                                     <td>{{ $product->stock }}</td>
                                     <td class="text-center">
                                         <form onsubmit="return confirm('Apakah anda yakin?');" action="" method="POST">
-                                            <a href="" class="btn btn-sm btn dark">Show</a>
-                                            <a href="" class="btn btn-sm btn primary">Edit</a>
+                                            <a href="" class="btn btn-sm btn-dark">Show</a>
+                                            <a href="" class="btn btn-sm btn-primary">Edit</a>
                                             @csrf
-                                            @methode DELETE
+                                            @method ('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                         </form>
                                     </td>
